@@ -1,0 +1,73 @@
+name:               contrapplicative
+version:            0.0.1
+license:            BSD3
+license-file:       etc/LICENCE.md
+author:             Dom De Re
+maintainer:         Dom De Re
+copyright:          Copyright (C) 2014
+synopsis:           A form of Applicative for Contravariant Functors
+category:           Control
+description:        A form of Applicative for Contravariant Functors
+homepage:           https://github.com/domdere/contrapplicative/issues
+bug-reports:        https://github.com/domdere/contrapplicative/issues
+cabal-version:      >= 1.18
+build-type:         Custom
+--extra-source-files: etc/CONTRIBUTORS,
+--                    etc/CREDITS
+
+source-repository       head
+    type:               git
+    location:           https://github.com/domdere/contrapplicative
+
+flag                    small_base
+    description:        Choose the new, split-up base package.
+
+library
+    default-language:   Haskell2010
+
+    build-depends:      base < 5 && >= 4
+                    ,   containers
+                    ,   array
+
+    ghc-options:        -Wall
+                        -fno-warn-unused-imports
+                        -fno-warn-unused-binds
+                        -fno-warn-unused-do-bind
+                        -fno-warn-type-defaults
+
+    hs-source-dirs:     src
+
+    exposed-modules:    Control.Applicative.Contravariant
+
+    other-modules:      Preamble
+
+    default-extensions: NoImplicitPrelude
+
+test-suite              quickcheck
+    default-language:   Haskell2010
+    type:               exitcode-stdio-1.0
+    main-is:            Main.hs
+    hs-source-dirs:     quickcheck
+    build-depends:      base                >= 4 && < 5
+                    ,   QuickCheck          == 2.7.6
+                    ,   contrapplicative
+
+
+test-suite              hlint
+    default-language:   Haskell2010
+    type:               exitcode-stdio-1.0
+    main-is:            Main.hs
+    hs-source-dirs:     hlint
+    build-depends:      base
+                    ,   hlint               == 1.9.*
+
+benchmark               benchmarks
+    default-language:   Haskell2010
+    type:               exitcode-stdio-1.0
+    hs-source-dirs:     benchmarks
+    main-is:            Main.hs
+    ghc-options:        -O2 -rtsopts
+
+    build-depends:      base > 4 && <= 5
+                    ,   contrapplicative
+                    ,   criterion >= 0.8
