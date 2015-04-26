@@ -1,3 +1,4 @@
+{-# LANGUAGE FunctionalDependencies, MultiParamTypeClasses #-}
 -------------------------------------------------------------------
 -- |
 -- Module       : Control.Applicative.Contravariant
@@ -7,4 +8,11 @@
 --
 -------------------------------------------------------------------
 module Control.Applicative.Contravariant (
+    -- * Type Classes
+        Contrapplicative(..)
     ) where
+
+import Preamble
+
+class (Applicative f') => Contrapplicative f f' b | f -> f', f -> b where
+    (<^>) :: f a -> f' (a -> b)
