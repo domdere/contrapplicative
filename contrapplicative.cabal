@@ -28,6 +28,7 @@ library
     build-depends:      base < 5 && >= 4
                     ,   containers
                     ,   array
+                    ,   contravariant           == 1.3.*
 
     ghc-options:        -Wall
                         -fno-warn-unused-imports
@@ -38,6 +39,7 @@ library
     hs-source-dirs:     src
 
     exposed-modules:    Control.Applicative.Contravariant
+                    ,   Data.Functor.Contravariant.Contra
 
     other-modules:      Preamble
 
